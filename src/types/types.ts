@@ -1,0 +1,9 @@
+export interface Artigos {
+    id: number;
+    title: string;
+    slug: string;
+    author: string;
+    date: string;
+    content: string;
+    image: string;
+}
