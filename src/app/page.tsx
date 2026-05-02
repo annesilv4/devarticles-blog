@@ -2,7 +2,7 @@ import Grid from "./components/Grid";
 import { Artigos } from "../lib/artigos"
 import Title from "./components/Title";
 
-export default async function Home() {
+export default function Home() {
 
   return (
     <>
