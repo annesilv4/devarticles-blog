@@ -5,5 +5,6 @@ export interface Artigo {
     author: string;
     date: string;
     content: string;
+    description: string;
     image: string;
 }
