@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevArticles
 
-## Getting Started
+Blog de artigos e tutoriais para desenvolvedores, construído com Next.js 16 e TypeScript.
 
-First, run the development server:
+## Sobre o projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+O **DevArticles** é uma aplicação estática que exibe uma listagem de artigos sobre desenvolvimento web. Cada artigo possui uma página de detalhes com título, autor, data de publicação, imagem de capa e conteúdo completo.
+
+## Funcionalidades
+
+- Listagem de artigos em destaque na página inicial
+- Página de detalhes por artigo com rota dinâmica (`/artigos/[slug]`)
+- Geração estática de todas as páginas com `generateStaticParams`
+- Metadados dinâmicos com Open Graph por artigo
+- Layout com Header e Footer globais
+
+## Tecnologias
+
+- [Next.js 16](https://nextjs.org/) — framework React com App Router
+- [React 19](https://react.dev/) — biblioteca de interfaces
+- [TypeScript](https://www.typescriptlang.org/) — tipagem estática
+- [CSS Modules](https://github.com/css-modules/css-modules) — estilos com escopo por componente
+- [React Compiler](https://react.dev/learn/react-compiler) — otimização automática de re-renderizações
+
+## Estrutura do projeto
+
+```
+src/
+├── app/
+│   ├── layout.tsx               # Layout global (Header + Footer)
+│   ├── page.tsx                 # Página inicial com listagem de artigos
+│   └── artigos/
+│       └── [slug]/
+│           └── page.tsx         # Página de detalhes do artigo
+├── components/
+│   ├── Card/                    # Card de artigo para a listagem
+│   ├── Footer/                  # Rodapé
+│   ├── Grid/                    # Grade de artigos
+│   ├── Header/                  # Cabeçalho
+│   └── Title/                   # Título de seção
+├── lib/
+│   └── artigos.js               # Dados estáticos dos artigos
+├── styles/
+│   └── globals.css              # Estilos globais e variáveis CSS
+└── types/
+    └── types.ts                 # Interfaces TypeScript
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Como rodar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Pré-requisitos:** Node.js 18+
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Instalar dependências
+npm install
 
-## Learn More
+# Iniciar servidor de desenvolvimento
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts disponíveis
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Comando         | Descrição                                 |
+| --------------- | ----------------------------------------- |
+| `npm run dev`   | Inicia o servidor de desenvolvimento      |
+| `npm run build` | Gera o build de produção                  |
+| `npm run start` | Inicia o servidor com o build de produção |
 
-## Deploy on Vercel
+## Autor
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desenvolvido por Anne Carolayne - Aluno de Desenvolvimento Full Stack em Python
