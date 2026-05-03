@@ -5,9 +5,9 @@ import Style from "./DetailArtigo.module.css";
 import Link from "next/link";
 
 interface ArtigoPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 export const dynamic = "force-static";
@@ -23,7 +23,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ArtigoPageProps): Promise<Metadata> {
-    const artigo = await getArtigo(params.slug);
+    const { slug } = await params;
+    const artigo = await getArtigo(slug);
 
     if (!artigo) {
         return {
@@ -44,7 +45,8 @@ export async function generateMetadata({ params }: ArtigoPageProps): Promise<Met
 }
 
 export default async function ArtigoPage({ params }: ArtigoPageProps) {
-    const artigo = await getArtigo(params.slug);
+    const { slug } = await params;
+    const artigo = await getArtigo(slug);
 
     if (!artigo) {
         return notFound();
