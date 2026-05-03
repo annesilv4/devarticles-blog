@@ -5,17 +5,15 @@ import Style from "./DetailArtigo.module.css";
 import Link from "next/link";
 
 interface ArtigoPageProps {
-    params: Promise<{
+    params: {
         slug: string;
-    }>;
+    };
 }
 
 export const dynamic = "force-static";
 
 async function getArtigo(slug: string) {
-    return Artigos.find(
-        (item) => item.slug === slug
-    );
+    return Artigos.find((item) => item.slug === slug);
 }
 
 export async function generateStaticParams() {
@@ -25,8 +23,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ArtigoPageProps): Promise<Metadata> {
-    const { slug } = await params;
-    const artigo = await getArtigo(slug);
+    const artigo = await getArtigo(params.slug);
 
     if (!artigo) {
         return {
@@ -38,17 +35,26 @@ export async function generateMetadata({ params }: ArtigoPageProps): Promise<Met
     return {
         title: artigo.title,
         description: artigo.content.substring(0, 120) + "...",
+        openGraph: {
+            title: `${artigo.title} | DevArticles`,
+            description: artigo.description,
+            images: [`${artigo.image}`],
+        }
     };
 }
 
 export default async function ArtigoPage({ params }: ArtigoPageProps) {
-    const { slug } = await params;
-    const artigo = await getArtigo(slug);
-    const datePt = new Date(artigo?.date || "").toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+    const artigo = await getArtigo(params.slug);
 
     if (!artigo) {
         return notFound();
     }
+
+    const datePt = new Date(artigo.date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+    });
 
     return (
         <>
